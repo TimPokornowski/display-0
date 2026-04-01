@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRITICAL SYSTEM BREACH</title>
+<style>
+body {
+  margin: 0;
+  background: black;
+  color: #00ff00;
+  font-family: monospace;
+  overflow: hidden;
+  position: relative;
+}
+#terminal {
+  padding: 20px;
+  font-size: 1.2rem;
+  white-space: pre-line;
+  line-height: 1.5;
+}
+.cursor {
+  display: inline-block;
+  width: 10px;
+  background: #00ff00;
+  animation: blink 0.8s infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+#warning {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
+  font-size: 3em;
+  font-weight: bold;
+  text-align: center;
+}
+.target {
+  display: none;
+  position: absolute;
+  max-width: 500px;
+  transition: all 0.3s ease;
+}
+.greenText {
+  position: absolute;
+  color: #00ff00;
+  font-family: monospace;
+  font-size: 14px;
+  user-select: none;
+}
+</style>
+</head>
+<body>
+<div id="terminal"></div>
+<div id="warning">We know what you have been doing</div>
+<img id="img1" class="target" src="target1.jpg">
+<img id="img2" class="target" src="target2.jpg">
+<img id="img3" class="target" src="target3.jpg">
+<script>
+const terminal = document.getElementById('terminal');
+const warning = document.getElementById('warning');
+const targets = [document.getElementById('img1'), document.getElementById('img2'), document.getElementById('img3')];
+
+// Show images
+targets.forEach(img => {
+  img.style.display = 'block';
+  img.style.top = Math.random() * (window.innerHeight - 300) + 'px';
+  img.style.left = Math.random() * (window.innerWidth - 300) + 'px';
+});
+
+// Terminal lines
+const lines = [
+  'ACCESSING FILES...',
+  'CONTACTING NETWORK...',
+  'CAMERA ONLINE...',
+  'LOCATING IP...',
+  'SCANNING DOCUMENTS...',
+  'DOWNLOADING DATA...'
+];
+
+let i = 0;
+function typeLine() {
+  terminal.innerHTML += lines[i % lines.length] + '\n';
+  i++;
+  setTimeout(typeLine, Math.random() * 500);
+}
+typeLine();
+
+// Flash random green text continuously
+function createGreenText() {
+  const span = document.createElement('div');
+  span.className = 'greenText';
+  span.innerText = Math.random().toString(36).substring(2, 10);
+  span.style.top = Math.random() * window.innerHeight + 'px';
+  span.style.left = Math.random() * window.innerWidth + 'px';
+  span.style.fontSize = (10 + Math.random() * 20) + 'px';
+  document.body.appendChild(span);
+  setTimeout(() => document.body.removeChild(span), 5000);
+}
+setInterval(createGreenText, 50);
+
+// Prank reveal after 10 seconds
+setTimeout(() => {
+  warning.innerText = '😂 Relax — you got pranked.';
+}, 10000);
+</script>
+</
